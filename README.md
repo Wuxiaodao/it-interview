@@ -78,4 +78,4 @@ class Solution {
 ```
 
 
-#八股文
+#八股文 目前暂无动力 I dont like it.
