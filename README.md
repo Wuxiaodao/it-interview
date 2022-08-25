@@ -79,3 +79,5 @@ class Solution {
 
 
 #八股文 目前暂无动力 I dont like it.
+
+#8/25/2022 学习状态不佳，在挑选八股文内容
