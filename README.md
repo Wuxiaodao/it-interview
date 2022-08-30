@@ -105,6 +105,8 @@ class Solution{
 }
 
 ```
+
+```
 #给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
 class Solution {
     public boolean isValid(String s) {
