@@ -264,3 +264,71 @@ iframe会阻塞主页面的 onload 事件；
 使用框架时，要保证正确的使用导航链接，容易造成链接死循环；
 
 
+## CSS
+### 1.盒模型
+盒模型构成：content + padding + border + margin  
+W3C标准盒模型：width表示content（主内容）的宽度  
+IE盒子模型：width表示content（主内容）+padding（内边距）+border（边框）这三个部分的宽度
+
+切换盒模型：
+box-sizing:content-box  //W3C盒子模型
+box-sizing:border-box  //IE盒子模型
+
+### 3.伪类和伪元素
+常用的伪类：
+```
+a:link      // 未访问
+a:hover     //  悬停
+a:visited   // 已访问
+a:active    // 已选择
+```
+
+常用的伪元素：
+```
+span::before {  // 内容前面插入新内容
+    content:'';
+}
+span::after{  // 内容之后插入新内容
+    content:'';
+}
+```
+
+### 4.居中div的方案
+水平垂直居中：
+```
+div{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+```
+### 5.绝对定位和相对定位
+position属性的绝对定位：absolute和fixed统称为绝对定位  
+position属性的相对定位:relative  
+
+### 6.CSS3特性
+border-radius  //圆角  
+text-shadow    //文字阴影  
+transition     //动画过渡  
+animation      //动画  
+box-shadow     //盒子阴影  
+border-image   //图片边框  
+background-clip//背景绘制  
+color:rgba(0,0,0,0.1)  //透明度设置  
+flex           //布局  
+
+### 7.清除浮动的方法
+```
+<div style="clear:both" />
+<br clear:"all"/>
+//父元素使用overflow:hidden、auto
+//使用伪元素清除浮动
+```
+
+### 8.CSS优化
+尽量避免使用@import  
+多个图片背景尽量使用精灵图  
+减少重绘和重排的属性使用（如color，background，visibility等属性）  
+有重复命名时，选择器添加父节点方便快捷查找
+
