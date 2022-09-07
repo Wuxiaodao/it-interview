@@ -218,7 +218,7 @@ JSONP、PostMessage、document.domain、Websocket、CORS、Nginx反向代理、N
 
 # 9/6/2022
 ## HTML
-### 语义化标签有哪些
+### 1.语义化标签有哪些
 header    头部  
 nav       导航栏   
 section   区块  
@@ -332,3 +332,141 @@ flex           //布局
 减少重绘和重排的属性使用（如color，background，visibility等属性）  
 有重复命名时，选择器添加父节点方便快捷查找
 
+# 9/7/2022
+## JavaScript
+### 1.数据类型
+基础数据类型：Undefined、Null、Boolean、Number、String、Symbol【ES6】、Bigint【ES10】  
+复杂数据类型(三大引用类型)：Object、Array、Function【Array和Function都属于Object类型】
+```
+var obj = new Object()
+obj.name = 'zhangsan';
+
+var arr = new Array();
+ar.push(1);
+
+var func = function(){
+	return 1;
+}
+
+console.log(obj,arr,func);  //{name:'zhangsan'},{1},1
+```
+
+### 2.数据类型转换
+可以相互转换的类型：Number、String、Boolean
+
+
+### 3.原型和原型链
+定义一个函数数据类型（普通函数、类）时候，都会自带一个prototype属性，这个属性指向函数的原型对象，并且这个属性是一个对象数据类型的值  
+对象属性也自带一个属性_proto_，属性值是当前实例所属类的原型（prototype）。原型对象中有一个属性constructor，它指向函数对象  
+原型链指的是通过prototype对象指向父类对象最后指向Object对象的过程【Object最后为null】
+
+### 4.作用域和作用域链
+作用域就是代码的执行环境，全局执行环境就是全局作用域，函数的执行环境就是私有作用域，它们都是栈内存  
+当代码在一个环境中执行时，会创建变量对象的一个作用域链（作用域形成的链条)  
+内部环境可以通过作用域链访问所有外部环境，但外部环境不能访问内部环境的任何变量和函数  
+当在内部函数中，需要访问一个变量的时候，首先会访问函数本身的变量对象，是否有这个变量，如果没有，那么会继续沿作用域链往上查找，直到全局作用域。
+
+### 5.深拷贝和浅拷贝的方法
+浅拷贝就是可以将对象的基础类型复制，无法复制复杂数据类型  
+深拷贝就是为了解决无法复制数据类型，对数据进行深程度拷贝
+【浅拷贝】1.Object.assign 2.扩展运算符(...) 3.for...in
+
+【深拷贝】1.JSON对象来实现深拷贝【缺点：函数无法拷贝，会显示undefined】 
+2.lodash函数库实现深拷贝【需要引入lodash库】 3.递归
+
+### 6.闭包
+在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数”  
+在本质上，闭包是将函数内部和函数外部连接起来的桥梁
+
+### 7.常用的创建对象的几种方式
+工厂模式、构造函数模式、原型模式  
+通过Object构造函数或对象字面量创造单个对象  
+组合使用构造函数模式和原型模式  
+动态原型模式  
+寄生构造函数模式  
+稳妥构造函数模式
+
+### 8.继承的几种实现方法
+构造继承、原型链继承、拷贝继承、实例继承、组合继承、寄生组合继承
+
+### 9.this：call、apply、bind
+this的指向受函数运行环境的影响（默认指向window）  
+call方法可以修改this的指向（指向函数指向时所在的作用域），然后再执行函数
+```
+// function.prototype.call();
+
+   function f(x, y){
+     console.log(x + y);
+   }
+
+   f.call(null, 1, 1) // 2
+   ```
+   
+  apply和call作用类似，唯一区别是apply接受组作为函数执行时的参数
+  ```
+  // function.prototype.apply();
+
+function f(x, y){
+  console.log(x + y);
+}
+
+f.apply(null, [1, 1]) // 2
+  ```
+ bind用于将函数体内的this绑定到某个对象，然后返回一个新函数
+ ```
+ // function.prototype.bind();
+
+const add = function (x, y) {
+    console.log(x, y);
+    return x * this.a + y * this.b;
+}
+
+const newAdd = add.bind({a: 2, b: 3}, 5);  // 第二个参数为x值
+newAdd(5) // 输入参数为y值  结果: 25
+
+ ```
+
+### 10.事件捕获和事件冒泡 
+捕获型事件：事件从document对象开始触发，然后到目标事件  
+冒泡型事件：目标事件到document对象的顺序触发
+
+### 11.DOM操作
+获取DOM
+DOM事件
+
+onclick--------点击事件  
+onload---------进入时执行事件  
+onunload-------离开时执行事件  
+onmouseover----鼠标指针移入时执行事件  
+onmouseout-----鼠标指针移出时执行事件  
+onmousedown----鼠标摁下时执行事件  
+onmouseup------鼠标松开时执行事件  
+
+### 12.AJAX
+AJAX是异步 JavaScript 和 XML。    
+AJAX可以通过在后台与服务器进行少量数据交换,实现异步更新。  
+AJAX的XmlHttpRequest使您可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。  
+AJAX通过XMLHttpRequest对象，Web开发人员可以在页面加载以后进行页面的局部更新。  
+AJAX常用的方法：（新增）post,（获取）get,（删除）delete, （修改）put  
+原生AJAX请求
+```
+//创建 XMLHttpRequest 对象
+var ajax = new XMLHttpRequest();
+//规定请求的类型、URL 以及是否异步处理请求。
+ajax.open('GET',url,true);
+//发送信息至服务器时内容编码类型
+ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded"); 
+//发送请求
+ajax.send(null);  
+//接受服务器响应数据
+ajax.onreadystatechange = function () {};
+```
+
+## Git操作代码
+git status                // 查看本地文件修改的状态  
+git diff                  // 查看具体变更内容  
+git add .                 // 将所有改动文件添加到暂存区  
+git add 'file'            // 添加指定文件到暂存区  
+git commit -m 'message'   // 本次提交的说明  
+git pull                  // 拉取远程分支代码至本地分支  
+git push                  // 当前代码合并至远程仓库  
